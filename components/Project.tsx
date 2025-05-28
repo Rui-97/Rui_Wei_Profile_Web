@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
+import type { StaticImageData } from "next/image";
 
 import Tag from "./Tag";
 
@@ -14,7 +15,7 @@ const Project = ({
   title: string;
   description: string;
   tags?: string[];
-  imgSrc: string;
+  imgSrc: StaticImageData;
   link: string;
 }) => {
   return (

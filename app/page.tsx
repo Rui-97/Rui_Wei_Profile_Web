@@ -25,16 +25,13 @@ export default function Home() {
     };
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
-        console.log(entry);
         if (entry.isIntersecting) {
-          console.log(entry.target.id);
           setActiveSection(entry.target.id as NavId);
         }
       });
     }, options);
 
     sections.forEach((section) => {
-      console.log(`Observing section: ${section.id}`);
       observer.observe(section);
     });
 
@@ -42,7 +39,6 @@ export default function Home() {
       sections.forEach((section) => observer.unobserve(section));
     };
   }, []);
-  console.log(activeSection);
 
   return (
     <div className="w-screen h-screen" id="root">
