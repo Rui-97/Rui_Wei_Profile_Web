@@ -13,6 +13,7 @@ import { NavId } from "@/types/navigation";
 export default function Home() {
   const [activeSection, setActiveSection] = useState<NavId>("about");
   const mainRef = useRef<HTMLElement>(null);
+
   useEffect(() => {
     const mainElement = mainRef.current;
     if (!mainElement) return;
@@ -21,10 +22,11 @@ export default function Home() {
     const options = {
       root: mainElement,
       rootMargin: "0px",
-      threshold: [0.9],
+      threshold: 0.8,
     };
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
+        console.log(entry);
         if (entry.isIntersecting) {
           setActiveSection(entry.target.id as NavId);
         }
@@ -83,7 +85,7 @@ export default function Home() {
                 target="_blank"
                 className="flex flex-row gap-2"
               >
-                <p className="text-subtitle">View Résumé</p>
+                <p className="text-subtitle">View Resume</p>
                 <FontAwesomeIcon
                   icon={faArrowUpRightFromSquare}
                   className="group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:ease-in-out group-hover:duration-300"
@@ -106,14 +108,14 @@ export default function Home() {
           </section>
 
           <section id="projects">
-            {PROJECTS.map((p, i) => (
+            {PROJECTS.map((project, index) => (
               <Project
-                key={i}
-                title={p.title}
-                description={p.description}
-                tags={p.tags}
-                imgSrc={p.imgSrc}
-                link={p.link}
+                key={index}
+                title={project.title}
+                description={project.description}
+                tags={project.tags}
+                imgSrc={project.imgSrc}
+                link={project.link}
               />
             ))}
           </section>
