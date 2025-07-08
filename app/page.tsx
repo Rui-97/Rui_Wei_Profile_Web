@@ -13,7 +13,7 @@ import useResponsive from "@/hook/useResponsive";
 import NavItemMobile from "@/components/NavItemMobile";
 
 export default function Home() {
-  const { isTabletOrMobile, isMobile } = useResponsive();
+  const { isTabletOrMobile } = useResponsive();
   const [activeSection, setActiveSection] = useState<NavId>("about");
   const mainRef = useRef<HTMLElement>(null);
 
