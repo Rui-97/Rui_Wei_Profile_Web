@@ -4,19 +4,21 @@ import Image from "next/image";
 import avatar from "@/public/avatar.png";
 import { NavId } from "@/types/navigation";
 import NavItem from "./NavItem";
+import useResponsive from "@/hook/useResponsive";
 
 const NAV_IDS: NavId[] = ["about", "experiences", "projects"];
 
 const SideBar = ({ activeSection }: { activeSection: NavId }) => {
+  const { isTabletOrMobile, isMobile } = useResponsive();
   const [hovered, setHovered] = useState<NavId>("");
 
   return (
-    <div className="max-w-[500px] h-screen py-16 px-6 flex flex-col justify-between">
+    <div className="lg:max-w-[500px] lg:h-screen py-8 sm:py-16 px-6 flex flex-col justify-between">
       <Image
         src={avatar}
-        alt=""
-        width={180}
-        height={220}
+        alt="rui's selfie"
+        width={isMobile ? 120 : 180}
+        height={isMobile ? 130 : 220}
         className="rounded-xl"
       />
       <div className="mt-6">
@@ -30,20 +32,22 @@ const SideBar = ({ activeSection }: { activeSection: NavId }) => {
         </p>
       </div>
 
-      <nav className="flex-1 mt-20 flex flex-col gap-6">
-        {NAV_IDS.map((id, index) => (
-          <NavItem
-            key={index}
-            navId={id}
-            setHovered={setHovered}
-            hovered={hovered}
-            activeSection={activeSection}
-          />
-        ))}
-      </nav>
+      {!isTabletOrMobile && (
+        <nav className="flex-1 mt-20 flex flex-col gap-6">
+          {NAV_IDS.map((id, index) => (
+            <NavItem
+              key={index}
+              navId={id}
+              setHovered={setHovered}
+              hovered={hovered}
+              activeSection={activeSection}
+            />
+          ))}
+        </nav>
+      )}
 
       {/* social medium */}
-      <div className="flex gap-4">
+      <div className="flex gap-4 pt-6">
         <a href="https://github.com/Rui-97" target="_blank">
           <Image
             src="gitHubIcon.svg"

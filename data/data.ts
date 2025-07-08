@@ -7,7 +7,7 @@ import djImg from "@/public/dj_app.png";
 export const EXPERIENCES = [
   {
     duration: "2024-PRESENT",
-    title: "Softwear Developer • MathSolver",
+    title: "Frontend Developer • MathSolver",
     description:
       "Build and maintain an AI-powered math tutoring platform featuring real-time streaming chat and an adaptive learning system inspired by Duolingo. Designed to help students master SAT Math through interactive problem-solving and personalized learning paths.",
     tags: ["Typescript", "React", "Node.js"],

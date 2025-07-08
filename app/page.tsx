@@ -9,8 +9,11 @@ import Cursor from "@/components/Cursor";
 import Experience from "@/components/Experience";
 import { EXPERIENCES, PROJECTS } from "@/data/data";
 import { NavId } from "@/types/navigation";
+import useResponsive from "@/hook/useResponsive";
+import NavItemMobile from "@/components/NavItemMobile";
 
 export default function Home() {
+  const { isTabletOrMobile, isMobile } = useResponsive();
   const [activeSection, setActiveSection] = useState<NavId>("about");
   const mainRef = useRef<HTMLElement>(null);
 
@@ -26,7 +29,6 @@ export default function Home() {
     };
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
-        console.log(entry);
         if (entry.isIntersecting) {
           setActiveSection(entry.target.id as NavId);
         }
@@ -43,16 +45,17 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="w-screen h-screen" id="root">
+    <div className="w-screen lg:h-screen" id="root">
       <Cursor />
-      <div className="flex flex-col md:flex-row gap-32 max-w-screen-xl mx-auto h-screen">
+      <div className="flex flex-col lg:flex-row lg:gap-20 gap-2 max-w-screen-xl mx-auto lg:h-screen justify-center">
         <SideBar activeSection={activeSection} />
-        {/* main content */}
+
         <main
           ref={mainRef}
-          className="flex-1 py-16 px-6 scrollbar overflow-auto"
+          className="flex-1 sm:py-16 py-8 px-6 scrollbar lg:overflow-y-auto min-h-screen"
         >
           <section id="about">
+            {isTabletOrMobile && <NavItemMobile navText="about" />}
             <p className="mb-4">
               Hi, I’m Cindy (Rui) Wei – a passionate front-end developer
               dedicated to creating visually compelling and interactive web
@@ -85,7 +88,7 @@ export default function Home() {
                 target="_blank"
                 className="flex flex-row gap-2"
               >
-                <p className="text-subtitle">View Resume</p>
+                <p className="sm:text-subtitle text-lg">View Resume</p>
                 <FontAwesomeIcon
                   icon={faArrowUpRightFromSquare}
                   className="group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:ease-in-out group-hover:duration-300"
@@ -94,7 +97,11 @@ export default function Home() {
             </div>
           </section>
 
-          <section id="experiences" className="py-40 min-h-[60vh]">
+          <section
+            id="experiences"
+            className="sm:py-40 py-20 lg:min-h-[60vh] min-h-[50vh]"
+          >
+            {isTabletOrMobile && <NavItemMobile navText="experience" />}
             {EXPERIENCES.map((experience, index) => (
               <Experience
                 key={index}
@@ -108,6 +115,8 @@ export default function Home() {
           </section>
 
           <section id="projects">
+            {isTabletOrMobile && <NavItemMobile navText="projects" />}
+
             {PROJECTS.map((project, index) => (
               <Project
                 key={index}
